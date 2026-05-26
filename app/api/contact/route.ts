@@ -34,6 +34,7 @@ export async function POST(request: Request) {
   try {
     await notifyBroker({
       subject: `${inquiryLabel} — ${name} · ${PROPERTY_SITE_NAME}`,
+      replyTo: email,
       lines: [
         `New ${inquiryLabel.toLowerCase()} from the ${PROPERTY_SITE_NAME} microsite:`,
         "",

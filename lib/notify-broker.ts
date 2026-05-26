@@ -1,50 +1,116 @@
 import { PROPERTY_SITE_NAME } from "@/lib/property-content";
 import { BROKERAGE, LISTING_AGENT } from "@/lib/broker-info";
+import { validateEmailAddress, validatePhone } from "@/lib/form-validation";
 
 export type BrokerNotification = {
   subject: string;
   lines: string[];
+  replyTo?: string;
 };
 
 export type VisitorConfirmationKind = "general" | "showing" | "materials";
 
-function getFromAddress() {
-  return process.env.FROM_EMAIL ?? "onboarding@resend.dev";
-}
+type SendEmailOptions = {
+  to: string[];
+  subject: string;
+  text: string;
+  replyTo?: string;
+};
 
 function getResendApiKey() {
-  return process.env.RESEND_API_KEY;
+  return process.env.RESEND_API_KEY?.trim() || null;
 }
 
-async function sendEmail(to: string[], subject: string, text: string) {
-  const apiKey = getResendApiKey();
+function getFromAddress() {
+  const fromEmail = process.env.FROM_EMAIL?.trim();
 
-  if (!apiKey) {
-    console.info("[email]", { to, subject, text });
-    return;
+  if (fromEmail) {
+    return `${PROPERTY_SITE_NAME} <${fromEmail}>`;
+  }
+
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("FROM_EMAIL is not configured.");
+  }
+
+  return `${PROPERTY_SITE_NAME} <onboarding@resend.dev>`;
+}
+
+function getNotifyEmail() {
+  const notifyEmail = process.env.NOTIFY_EMAIL?.trim();
+
+  if (notifyEmail) {
+    return notifyEmail;
+  }
+
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("NOTIFY_EMAIL is not configured.");
+  }
+
+  return "bob@piljay.com";
+}
+
+function assertEmailDeliveryConfigured() {
+  if (!getResendApiKey()) {
+    throw new Error("RESEND_API_KEY is not configured.");
+  }
+
+  getFromAddress();
+  getNotifyEmail();
+}
+
+async function sendEmail({ to, subject, text, replyTo }: SendEmailOptions) {
+  assertEmailDeliveryConfigured();
+
+  const payload: Record<string, unknown> = {
+    from: getFromAddress(),
+    to,
+    subject,
+    text,
+  };
+
+  if (replyTo) {
+    payload.reply_to = replyTo;
   }
 
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${apiKey}`,
+      Authorization: `Bearer ${getResendApiKey()}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      from: `${PROPERTY_SITE_NAME} <${getFromAddress()}>`,
-      to,
-      subject,
-      text,
-    }),
+    body: JSON.stringify(payload),
   });
 
-  if (!response.ok) {
-    const errorBody = await response.text();
-    throw new Error(`Email delivery failed: ${errorBody}`);
-  }
-}
+  const responseBody = await response.text();
+  let parsedBody: { id?: string; message?: string; name?: string } | null = null;
 
-import { validateEmailAddress, validatePhone } from "@/lib/form-validation";
+  try {
+    parsedBody = responseBody ? JSON.parse(responseBody) : null;
+  } catch {
+    parsedBody = null;
+  }
+
+  if (!response.ok) {
+    const detail =
+      parsedBody?.message ??
+      responseBody ||
+      `Resend request failed with status ${response.status}`;
+    console.error("[email-send-failed]", {
+      status: response.status,
+      to,
+      subject,
+      detail,
+      name: parsedBody?.name,
+    });
+    throw new Error(`Email delivery failed: ${detail}`);
+  }
+
+  console.info("[email-sent]", {
+    id: parsedBody?.id,
+    to,
+    subject,
+  });
+}
 
 export function validateEmail(email: string) {
   return validateEmailAddress(email);
@@ -136,7 +202,7 @@ export function buildVisitorConfirmationEmail(name: string, kind: VisitorConfirm
 }
 
 export async function notifyBroker(notification: BrokerNotification) {
-  const notifyEmail = process.env.NOTIFY_EMAIL ?? "bob@piljay.com";
+  const notifyEmail = getNotifyEmail();
 
   if (!getResendApiKey()) {
     console.info("[broker-notification]", {
@@ -144,10 +210,21 @@ export async function notifyBroker(notification: BrokerNotification) {
       subject: notification.subject,
       body: notification.lines.join("\n"),
     });
+
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("RESEND_API_KEY is not configured.");
+    }
+
     return { delivered: false as const, logged: true as const };
   }
 
-  await sendEmail([notifyEmail], notification.subject, notification.lines.join("\n"));
+  await sendEmail({
+    to: [notifyEmail],
+    subject: notification.subject,
+    text: notification.lines.join("\n"),
+    replyTo: notification.replyTo,
+  });
+
   return { delivered: true as const, logged: false as const };
 }
 
@@ -159,7 +236,12 @@ export async function sendVisitorConfirmation(
   const { subject, text } = buildVisitorConfirmationEmail(name, kind);
 
   try {
-    await sendEmail([email], subject, text);
+    await sendEmail({
+      to: [email],
+      subject,
+      text,
+      replyTo: LISTING_AGENT.email,
+    });
   } catch (error) {
     console.error("[visitor-confirmation-email]", error);
   }

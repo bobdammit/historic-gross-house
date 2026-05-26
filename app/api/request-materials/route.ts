@@ -36,6 +36,7 @@ export async function POST(request: Request) {
   try {
     await notifyBroker({
       subject: `Materials Request — ${name} · ${PROPERTY_SITE_NAME}`,
+      replyTo: email,
       lines: [
         `New offering memorandum / materials request from the ${PROPERTY_SITE_NAME} microsite:`,
         "",

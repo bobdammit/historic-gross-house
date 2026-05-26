@@ -60,11 +60,11 @@ export function SiteNav({ onNavigate, onContact }: SiteNavProps) {
               <Button
                 type="button"
                 variant="outline"
-                size="icon"
-                className="h-11 w-11 border-border/40 bg-transparent lg:hidden"
+                className="h-11 gap-2 border-primary/50 bg-primary/10 px-3.5 text-[11px] font-medium uppercase tracking-[0.1em] text-primary shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)] transition-all duration-300 hover:border-primary hover:bg-primary/20 hover:text-primary lg:hidden sm:px-4"
                 aria-label="Open site menu"
               >
-                <Menu className="h-5 w-5" />
+                <Menu className="h-4 w-4 shrink-0" strokeWidth={2.25} />
+                Menu
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="flex w-[min(100vw-2rem,320px)] flex-col border-border/30 bg-background px-0">
