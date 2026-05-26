@@ -27,7 +27,10 @@ export function SiteNav({ onNavigate, onContact }: SiteNavProps) {
   };
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 border-b border-border/20 bg-background/90 backdrop-blur-xl supports-[padding:max(0px)]:pt-[max(0px,env(safe-area-inset-top))]">
+    <nav
+      data-site-header
+      className="fixed inset-x-0 top-0 z-50 border-b border-border/20 bg-background/90 backdrop-blur-xl supports-[padding:max(0px)]:pt-[max(0px,env(safe-area-inset-top))]"
+    >
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-5 py-4 sm:px-8 lg:px-16 lg:py-6">
         <button
           type="button"

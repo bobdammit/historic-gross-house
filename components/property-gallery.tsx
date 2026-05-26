@@ -25,6 +25,7 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { scrollToSiteSection } from "@/lib/scroll-to-section";
 import { cn } from "@/lib/utils";
 
 type LightboxScope = "featured" | "gallery";
@@ -211,7 +212,7 @@ export function PropertyGallery() {
   };
 
   const scrollToBrowse = () => {
-    document.getElementById("gallery-browse")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    scrollToSiteSection("gallery");
   };
 
   const closeLightbox = () => {
@@ -307,7 +308,7 @@ export function PropertyGallery() {
           </div>
         </div>
 
-        <div id="gallery-browse" className="scroll-mt-28">
+        <div id="gallery-browse" className="scroll-mt-site-header">
           <div className="mb-10">
             <h3 className="font-serif text-[1.35rem] font-normal text-foreground sm:text-[1.5rem]">
               Browse All Photos

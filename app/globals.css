@@ -38,6 +38,13 @@
   --sidebar-accent-foreground: oklch(0.92 0.01 80);
   --sidebar-border: oklch(0.20 0.018 255);
   --sidebar-ring: oklch(0.80 0.095 70);
+  --site-header-offset: 5.5rem;
+}
+
+@media (width >= 64rem) {
+  :root {
+    --site-header-offset: 6.75rem;
+  }
 }
 
 @theme inline {
@@ -98,7 +105,7 @@
 /* Smooth scrolling with refined easing */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 100px;
+  scroll-padding-top: var(--site-header-offset);
 }
 
 /* Premium text selection */
@@ -145,15 +152,20 @@ html {
 }
 
 @utility section-pad {
-  padding-block: calc(var(--spacing) * 20);
+  scroll-margin-top: var(--site-header-offset);
+  padding-bottom: calc(var(--spacing) * 20);
 
   @media (width >= 48rem) {
-    padding-block: calc(var(--spacing) * 28);
+    padding-bottom: calc(var(--spacing) * 28);
   }
 
   @media (width >= 64rem) {
-    padding-block: calc(var(--spacing) * 48);
+    padding-bottom: calc(var(--spacing) * 48);
   }
+}
+
+@utility scroll-mt-site-header {
+  scroll-margin-top: var(--site-header-offset);
 }
 
 @utility section-heading {

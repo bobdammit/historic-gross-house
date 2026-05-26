@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { 
   Building2, 
@@ -22,7 +23,7 @@ import { ContactForm } from "@/components/contact-form";
 import { SiteNav } from "@/components/site-nav";
 import { BROKERAGE, LISTING_AGENT } from "@/lib/broker-info";
 import { PROPERTY_MAP_EMBED_URL } from "@/lib/property-content";
-import { useState } from "react";
+import { scrollToSiteSection } from "@/lib/scroll-to-section";
 
 const SHOWING_MESSAGE =
   "I'm interested in scheduling a showing for The Historic Gross House at 290 East King Avenue.";
@@ -31,7 +32,7 @@ export default function GrossHousePage() {
   const [contactPrefill, setContactPrefill] = useState("");
   const [contactInquiryType, setContactInquiryType] = useState<"general" | "showing">("general");
   const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    scrollToSiteSection(id);
   };
 
   const requestShowing = () => {
