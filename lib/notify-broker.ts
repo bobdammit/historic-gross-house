@@ -160,6 +160,15 @@ export function buildVisitorConfirmationEmail(name: string, kind: VisitorConfirm
         ? `Your showing request — ${PROPERTY_SITE_NAME}`
         : `Thank you for your inquiry — ${PROPERTY_SITE_NAME}`;
 
+  const signatureBlock = [
+    "Best regards,",
+    LISTING_AGENT.displayTitle,
+    "",
+    BROKERAGE.name,
+    BROKERAGE.fullAddress,
+    BROKERAGE.phone,
+  ];
+
   const lines =
     kind === "materials"
       ? [
@@ -172,13 +181,7 @@ export function buildVisitorConfirmationEmail(name: string, kind: VisitorConfirm
           "",
           `If you need immediate assistance, you can reach ${LISTING_AGENT.name} at ${LISTING_AGENT.cell} or ${LISTING_AGENT.email}.`,
           "",
-          BROKERAGE.name,
-          BROKERAGE.fullAddress,
-          BROKERAGE.phone,
-          "",
-          "Best regards,",
-          LISTING_AGENT.name,
-          `${LISTING_AGENT.displayTitle} · ${BROKERAGE.name}`,
+          ...signatureBlock,
         ]
       : [
           greeting,
@@ -189,13 +192,7 @@ export function buildVisitorConfirmationEmail(name: string, kind: VisitorConfirm
           "",
           `If you need immediate assistance, you can reach ${LISTING_AGENT.name} at ${LISTING_AGENT.cell} or ${LISTING_AGENT.email}.`,
           "",
-          BROKERAGE.name,
-          BROKERAGE.fullAddress,
-          BROKERAGE.phone,
-          "",
-          "Best regards,",
-          LISTING_AGENT.name,
-          `${LISTING_AGENT.displayTitle} · ${BROKERAGE.name}`,
+          ...signatureBlock,
         ];
 
   return { subject, text: lines.join("\n") };
