@@ -86,7 +86,7 @@ export default function GrossHousePage() {
               <span className="mb-4 block text-[2.35rem] leading-[1.02] text-foreground sm:mb-5 sm:text-[3rem] md:text-[3.5rem] lg:text-[4rem] xl:text-[4.5rem]">
                 The Historic Gross House · Est. 1912
               </span>
-              <span className="block max-w-lg text-[13px] font-sans font-light uppercase leading-[1.7] tracking-[0.15em] text-muted-foreground sm:text-[15px] sm:tracking-[0.18em] md:text-[16px]">
+              <span className="block max-w-lg text-[13px] font-sans font-light uppercase leading-[1.7] tracking-[0.15em] text-primary sm:text-[15px] sm:tracking-[0.18em] md:text-[16px]">
                 A Landmark Estate Built for Commercial Conversion
               </span>
             </h1>
