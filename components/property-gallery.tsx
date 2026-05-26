@@ -86,11 +86,13 @@ function RotatingCategoryTile({
   paused?: boolean;
 }) {
   const categoryPool = useMemo(() => getGalleryImagesByCategory(category), [category]);
-  const [image, setImage] = useState<GalleryImage>(() => {
-    const initial = pickRandomGalleryImageExcluding(categoryPool);
-    return initial ?? categoryPool[0];
-  });
+  const [image, setImage] = useState<GalleryImage>(() => categoryPool[0]);
   const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const initial = pickRandomGalleryImageExcluding(categoryPool) ?? categoryPool[0];
+    setImage(initial);
+  }, [categoryPool]);
 
   useEffect(() => {
     if (paused || categoryPool.length <= 1) return;

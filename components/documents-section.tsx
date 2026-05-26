@@ -4,7 +4,11 @@ import type { LucideIcon } from "lucide-react";
 import { Building2, Download, ExternalLink, FileText, Lock, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { COMMERCIAL_FLYER, GATED_DOCUMENTS, type GatedDocument } from "@/lib/documents";
-import { useMaterialsGateway } from "@/components/materials-gateway";
+import {
+  MATERIALS_REQUEST_SECTION_ID,
+  MaterialsRequestPanel,
+  useMaterialsGateway,
+} from "@/components/materials-gateway";
 
 function getDocumentIcon(document: GatedDocument): LucideIcon {
   if (document.group === "map") return MapPin;
@@ -210,6 +214,10 @@ export function DocumentsSection() {
               </div>
             </div>
           )}
+
+          <div id={MATERIALS_REQUEST_SECTION_ID} className="scroll-mt-site-header mb-10">
+            <MaterialsRequestPanel />
+          </div>
 
           <div className="mt-16">
             <DocumentGroup

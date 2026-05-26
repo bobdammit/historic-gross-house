@@ -41,9 +41,13 @@ export function HeroDocumentsCtas({
         <Button
           size="lg"
           variant="outline"
-          onClick={() =>
-            unlocked ? openDocument("offering-memorandum") : openGateway()
-          }
+          onClick={() => {
+            if (unlocked) {
+              openDocument("offering-memorandum");
+              return;
+            }
+            openGateway();
+          }}
           className="group h-16 w-full border-border/40 bg-background/30 px-10 text-[13px] font-semibold uppercase tracking-[0.1em] text-foreground backdrop-blur-sm transition-all duration-500 hover:border-primary/40 hover:bg-primary/5 hover:text-foreground sm:min-w-[240px] sm:w-auto"
         >
           <Lock className="mr-3 h-4 w-4 text-primary transition-transform duration-500 group-hover:scale-110" />
