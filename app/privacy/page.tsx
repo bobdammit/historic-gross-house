@@ -7,6 +7,8 @@ import { SITE_LEGAL } from "@/lib/site-legal";
 export const metadata: Metadata = {
   title: `Privacy Policy | ${SITE_LEGAL.siteName}`,
   description: `Privacy policy for the ${SITE_LEGAL.siteName} property listing website.`,
+  alternates: { canonical: "/privacy" },
+  robots: { index: true, follow: true },
 };
 
 export default function PrivacyPolicyPage() {

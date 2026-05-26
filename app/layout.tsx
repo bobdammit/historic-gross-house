@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { ListingJsonLd } from '@/components/listing-json-ld'
 import { siteMetadata } from '@/lib/site-metadata'
 import './globals.css'
 
@@ -35,6 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} bg-background`}>
       <body className="font-sans antialiased">
+        <ListingJsonLd />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

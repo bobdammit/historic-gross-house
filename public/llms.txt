@@ -1,0 +1,35 @@
+# The Historic Gross House — Commercial Real Estate Listing
+
+> Canonical marketing site for a for-sale commercial conversion opportunity in Kingsland, Georgia.
+
+## Summary
+
+- Property: The Historic Gross House (est. 1912)
+- Address: 290 East King Avenue, Kingsland, GA 31548
+- Asking price: $574,900 USD
+- Building size: approximately 3,955 square feet
+- Lot: 0.55-acre corner lot with on-site parking
+- Use case: Professional or medical office conversion; adaptive reuse of a historic residence
+- Listing agent: Bob Piljay, Associate Broker (Florida and Georgia), Watson Realty Corp.
+- Agent phone: (912) 322-1377
+- Agent email: bob@piljay.com
+- Brokerage phone: (912) 882-5658
+
+## Site sections
+
+- Home / overview: /
+- Photo gallery: /#gallery
+- Location & market: /#location
+- Matterport 3D tour: /#tour
+- Offering documents: /#documents
+- Contact & showings: /#contact
+- Privacy policy: /privacy
+- Terms: /terms
+
+## Public documents
+
+- Property flyer (PDF): /documents/290-e-king-ave-kingsland-commercial-flyer.pdf
+
+## Photography & media
+
+Site photography, drone imagery, Matterport tour, and web design by Piljay Photography, LLC (Bob Piljay).

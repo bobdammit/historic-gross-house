@@ -7,6 +7,8 @@ import { SITE_LEGAL } from "@/lib/site-legal";
 export const metadata: Metadata = {
   title: `Terms & Conditions | ${SITE_LEGAL.siteName}`,
   description: `Terms and conditions for the ${SITE_LEGAL.siteName} property listing website.`,
+  alternates: { canonical: "/terms" },
+  robots: { index: true, follow: true },
 };
 
 export default function TermsPage() {
