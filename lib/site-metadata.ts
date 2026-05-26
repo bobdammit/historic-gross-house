@@ -11,7 +11,7 @@ const siteTitle = `${PROPERTY_SITE_NAME} | Commercial Conversion Opportunity`;
 const siteDescription =
   "1912 landmark estate in downtown Kingsland, GA with strong potential for professional or medical office conversion. ±3,955 SF · $574,900.";
 
-const ogImagePath = "/images/open-graph.jpg";
+const ogImagePath = "/images/og-share.jpg";
 const ogImageAlt = `${PROPERTY_SITE_NAME} — Commercial Conversion Opportunity`;
 
 export const siteMetadata: Metadata = {
