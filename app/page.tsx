@@ -402,30 +402,32 @@ export default function GrossHousePage() {
                   <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-muted-foreground mb-6">
                     Listing Brokerage
                   </p>
-                  <h4 className="text-[1.25rem] font-serif font-normal text-foreground mb-6">{BROKERAGE.name}</h4>
+                  <h4 className="mb-6 font-serif text-[1.75rem] font-normal leading-[1.3] text-foreground">
+                    {BROKERAGE.name}
+                  </h4>
 
-                  <div className="space-y-6">
+                  <div className="space-y-8">
                     <a
                       href={`tel:${BROKERAGE.phoneTel}`}
-                      className="group flex items-center gap-5 text-foreground hover:text-primary transition-colors duration-500"
+                      className="group flex items-center gap-6 text-foreground transition-colors duration-500 hover:text-primary"
                     >
-                      <div className="w-11 h-11 rounded-xl bg-primary/8 flex items-center justify-center group-hover:bg-primary/12 transition-colors duration-500">
-                        <Phone className="h-4 w-4 text-primary/80" />
+                      <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/8 transition-colors duration-500 group-hover:bg-primary/12">
+                        <Phone className="h-5 w-5 text-primary/80" />
                       </div>
                       <div>
-                        <p className="text-[9px] text-muted-foreground tracking-[0.3em] uppercase mb-1">Office</p>
-                        <p className="text-[15px] font-medium tracking-[0.02em]">{BROKERAGE.phone}</p>
+                        <p className="mb-1 text-[9px] uppercase tracking-[0.3em] text-muted-foreground">Office</p>
+                        <p className="text-[16px] font-medium tracking-[0.02em]">{BROKERAGE.phone}</p>
                       </div>
                     </a>
 
-                    <div className="flex items-start gap-5 text-foreground">
-                      <div className="w-11 h-11 rounded-xl bg-primary/8 flex items-center justify-center shrink-0">
-                        <MapPin className="h-4 w-4 text-primary/80" />
+                    <div className="flex items-start gap-6 text-foreground">
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-primary/8">
+                        <MapPin className="h-5 w-5 text-primary/80" />
                       </div>
                       <div>
-                        <p className="text-[9px] text-muted-foreground tracking-[0.3em] uppercase mb-1">Office Address</p>
-                        <p className="text-[15px] font-medium tracking-[0.02em]">{BROKERAGE.addressLine1}</p>
-                        <p className="text-[14px] font-light text-muted-foreground">{BROKERAGE.cityStateZip}</p>
+                        <p className="mb-1 text-[9px] uppercase tracking-[0.3em] text-muted-foreground">Office Address</p>
+                        <p className="text-[16px] font-medium tracking-[0.02em]">{BROKERAGE.addressLine1}</p>
+                        <p className="text-[16px] font-medium tracking-[0.02em]">{BROKERAGE.cityStateZip}</p>
                       </div>
                     </div>
                   </div>

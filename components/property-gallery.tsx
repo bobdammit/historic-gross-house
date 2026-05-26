@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Expand } from "lucide-react";
+import { ChevronLeft, ChevronRight, Expand, Maximize2, Minimize2 } from "lucide-react";
 import {
   GALLERY_CATEGORY_LABELS,
   GALLERY_FILTERS,
@@ -71,6 +71,7 @@ export function PropertyGallery() {
   const [activeFilter, setActiveFilter] = useState<GalleryFilterId>("all");
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const lightboxImages = useMemo(
     () =>
@@ -97,7 +98,14 @@ export function PropertyGallery() {
   };
 
   const openLightbox = (image: GalleryImage) => setLightboxSrc(image.src);
-  const closeLightbox = () => setLightboxSrc(null);
+  const closeLightbox = () => {
+    setLightboxSrc(null);
+    setIsExpanded(false);
+  };
+
+  const handleLightboxOpenChange = (open: boolean) => {
+    if (!open) closeLightbox();
+  };
 
   const showPrevious = () => {
     if (lightboxIndex < 0) return;
@@ -194,38 +202,68 @@ export function PropertyGallery() {
         )}
       </div>
 
-      <Dialog open={lightboxSrc !== null} onOpenChange={(open) => !open && closeLightbox()}>
+      <Dialog open={lightboxSrc !== null} onOpenChange={handleLightboxOpenChange}>
         <DialogContent
           showCloseButton
-          className="max-h-[95dvh] w-[min(1200px,calc(100vw-1rem))] max-w-none gap-0 overflow-hidden border-border/40 bg-background p-0 sm:w-[min(1200px,calc(100vw-2rem))]"
+          className={cn(
+            "flex max-w-none flex-col gap-0 overflow-hidden border-border/40 bg-background p-0 transition-all duration-300",
+            isExpanded
+              ? "fixed !top-1 !left-1 !h-[calc(100dvh-0.5rem)] !w-[calc(100vw-0.5rem)] !max-w-none !translate-x-0 !translate-y-0 sm:!top-2 sm:!left-2 sm:!h-[calc(100vh-1rem)] sm:!w-[calc(100vw-1rem)]"
+              : "max-h-[95dvh] w-[min(1200px,calc(100vw-1rem))] sm:w-[min(1200px,calc(100vw-2rem))]"
+          )}
         >
           {activeImage && lightboxIndex >= 0 && (
             <>
               <DialogTitle className="sr-only">{activeImage.alt}</DialogTitle>
               <DialogDescription className="sr-only">{activeImage.caption}</DialogDescription>
 
-              <div className="relative aspect-[16/10] w-full bg-muted">
-                <Image
-                  src={activeImage.src}
-                  alt={activeImage.alt}
-                  fill
-                  className="object-contain bg-background"
-                  sizes="100vw"
-                  priority
-                />
-
-                <div className="absolute inset-x-0 top-0 flex flex-col gap-3 bg-gradient-to-b from-background/90 to-transparent p-4 sm:flex-row sm:items-start sm:justify-between sm:gap-4 sm:p-5">
-                  <div>
-                    <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-primary/80">
-                      {GALLERY_CATEGORY_LABELS[activeImage.category]}
-                    </p>
-                    <p className="mt-1 max-w-2xl font-serif text-lg text-foreground">
-                      {activeImage.caption}
-                    </p>
-                  </div>
-                  <p className="shrink-0 text-[12px] text-muted-foreground">
+              <div className="flex shrink-0 flex-col gap-3 border-b border-border/20 px-4 py-3 pr-14 sm:flex-row sm:items-start sm:justify-between sm:gap-4 sm:px-5 sm:py-4">
+                <div className="min-w-0">
+                  <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-primary/80">
+                    {GALLERY_CATEGORY_LABELS[activeImage.category]}
+                  </p>
+                  <p className="mt-1 font-serif text-base text-foreground sm:text-lg">{activeImage.caption}</p>
+                </div>
+                <div className="flex shrink-0 flex-col gap-3 sm:items-end">
+                  <p className="text-[12px] text-muted-foreground">
                     {lightboxIndex + 1} / {lightboxImages.length}
                   </p>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setIsExpanded((expanded) => !expanded)}
+                    className="h-10 w-full border-border/50 text-[10px] uppercase tracking-[0.12em] sm:w-auto"
+                  >
+                    {isExpanded ? (
+                      <>
+                        <Minimize2 className="mr-2 h-4 w-4" />
+                        Exit Full Screen
+                      </>
+                    ) : (
+                      <>
+                        <Maximize2 className="mr-2 h-4 w-4" />
+                        Full Screen
+                      </>
+                    )}
+                  </Button>
+                </div>
+              </div>
+
+              <div
+                className={cn(
+                  "relative bg-muted",
+                  isExpanded ? "flex min-h-0 flex-1 items-center justify-center" : "aspect-[16/10] w-full shrink-0"
+                )}
+              >
+                <div className={cn("relative", isExpanded ? "h-full w-full" : "absolute inset-0")}>
+                  <Image
+                    src={activeImage.src}
+                    alt={activeImage.alt}
+                    fill
+                    className="bg-background object-contain"
+                    sizes="100vw"
+                    priority
+                  />
                 </div>
 
                 <Button
