@@ -67,6 +67,7 @@ export function HomePage() {
             alt="The Historic Gross House - 290 East King Avenue, Kingsland, Georgia"
             fill
             className="object-cover object-[72%_42%] max-lg:object-[68%_38%] lg:object-center"
+            sizes="100vw"
             priority
           />
           <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-background to-transparent sm:h-20 lg:hidden" />
