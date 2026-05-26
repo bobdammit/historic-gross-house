@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { LegalPageLayout, LegalSection } from "@/components/legal-page-layout";
+import { SITE_CREDITS, SITE_CREDITS_COPYRIGHT_SECTION_ID } from "@/lib/site-credits";
 import { SITE_LEGAL } from "@/lib/site-legal";
 
 export const metadata: Metadata = {
@@ -23,6 +25,22 @@ export default function PrivacyPolicyPage() {
         <p>
           The Site is operated to provide information about a commercial real estate listing. Listing services are
           provided by {SITE_LEGAL.listingAgent} of {SITE_LEGAL.brokerageName}.
+        </p>
+        <p>
+          Photographs, aerial imagery, virtual tour media, and website design were created by{" "}
+          <a
+            href={SITE_CREDITS.companyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:underline"
+          >
+            {SITE_CREDITS.companyName}
+          </a>
+          . See our{" "}
+          <a href={`/terms#${SITE_CREDITS_COPYRIGHT_SECTION_ID}`} className="text-primary hover:underline">
+            Terms &amp; Conditions
+          </a>{" "}
+          for copyright and permitted use.
         </p>
       </LegalSection>
 

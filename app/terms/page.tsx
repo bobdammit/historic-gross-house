@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { LegalPageLayout, LegalSection } from "@/components/legal-page-layout";
+import { SITE_CREDITS, SITE_CREDITS_COPYRIGHT_SECTION_ID } from "@/lib/site-credits";
 import { SITE_LEGAL } from "@/lib/site-legal";
 
 export const metadata: Metadata = {
@@ -97,11 +99,56 @@ export default function TermsPage() {
         </p>
       </LegalSection>
 
-      <LegalSection title="Intellectual Property">
+      <LegalSection title="Copyright, Photography & Media" id={SITE_CREDITS_COPYRIGHT_SECTION_ID}>
         <p>
-          Text, photographs, branding, and other content on the Site are protected by applicable intellectual property
-          laws and may not be copied, scraped, or reused without permission, except for personal review related to this
-          listing inquiry.
+          Unless otherwise noted, all visual media and creative work on this Site — including still photographs,
+          aerial drone imagery, the Matterport three-dimensional virtual tour, graphic design, and the website itself —
+          were created by {SITE_CREDITS.creatorName} of {SITE_CREDITS.companyName} (&ldquo;Piljay
+          Photography&rdquo;).
+        </p>
+        <p>
+          Piljay Photography owns all copyrights and related rights in that work. No ownership interest in those
+          materials is transferred to visitors, brokers, or third parties by viewing the Site or inquiring about the
+          listing.
+        </p>
+        <p>
+          Aerial imagery was captured under {SITE_CREDITS.creatorName}&apos;s FAA Part 107 Remote Pilot Certificate
+          (certificate number {SITE_CREDITS.faaPart107CertificateNumber}) for lawful commercial UAS operations.
+        </p>
+        <p>
+          You may view Site content for personal evaluation of this property listing. You may not copy, download,
+          scrape, redistribute, publish, or create derivative works from Site photographs, video, tour media, or
+          design assets without prior written permission from {SITE_CREDITS.companyName}, except where a separate
+          written license or agreement expressly allows it.
+        </p>
+        <p>
+          Requests regarding reproduction, licensing, or attribution may be directed to{" "}
+          <a href={`mailto:${SITE_CREDITS.contactEmail}`} className="text-primary hover:underline">
+            {SITE_CREDITS.contactEmail}
+          </a>{" "}
+          or{" "}
+          <a
+            href={SITE_CREDITS.companyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:underline"
+          >
+            {SITE_CREDITS.companyName}
+          </a>
+          .
+        </p>
+        <p>
+          The Matterport platform and player are third-party services; Piljay Photography produced the scan and tour
+          experience presented on this Site. Matterport&apos;s own terms apply to use of their embedded player and
+          tools.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="Other Intellectual Property">
+        <p>
+          Listing text, brokerage branding, and materials supplied by the listing agent or brokerage may be subject to
+          separate ownership. Where those materials appear alongside Piljay Photography work, each party retains its
+          respective rights.
         </p>
       </LegalSection>
 

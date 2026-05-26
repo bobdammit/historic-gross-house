@@ -21,7 +21,9 @@ import { HeroDocumentsCtas } from "@/components/hero-documents-ctas";
 import { DocumentsSection } from "@/components/documents-section";
 import { ContactForm } from "@/components/contact-form";
 import { SiteNav } from "@/components/site-nav";
+import { SiteCredits } from "@/components/site-credits";
 import { BROKERAGE, LISTING_AGENT } from "@/lib/broker-info";
+import { SITE_CREDITS } from "@/lib/site-credits";
 import { PROPERTY_MAP_EMBED_URL } from "@/lib/property-content";
 import { scrollToSiteSection } from "@/lib/scroll-to-section";
 
@@ -463,6 +465,14 @@ export default function GrossHousePage() {
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] text-muted-foreground/70 lg:justify-self-center">
+              <a
+                href={SITE_CREDITS.companyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-foreground"
+              >
+                Piljay Photography
+              </a>
               <a href="/privacy" className="transition-colors hover:text-foreground">
                 Privacy Policy
               </a>
@@ -480,6 +490,10 @@ export default function GrossHousePage() {
                 © {new Date().getFullYear()} All rights reserved. Information deemed reliable but not guaranteed.
               </p>
             </div>
+          </div>
+
+          <div className="mt-10 border-t border-border/15 pt-8 sm:mt-12 sm:pt-10">
+            <SiteCredits />
           </div>
         </div>
       </footer>
