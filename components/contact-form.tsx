@@ -6,7 +6,8 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { emailInputProps, normalizePhoneInput, phoneInputProps } from "@/lib/form-validation";
-import { CONTACT_SMS_OPT_IN_LABEL } from "@/lib/sms-consent";
+import { LISTING_AGENT } from "@/lib/broker-info";
+import { PROPERTY_SITE_NAME } from "@/lib/property-content";
 
 type ContactFormProps = {
   prefillMessage?: string;
@@ -110,18 +111,23 @@ export function ContactForm({ prefillMessage = "", inquiryType = "general" }: Co
             placeholder="9123221377"
             {...phoneInputProps}
           />
-          <div className="flex items-start gap-3 rounded-xl border border-border/20 bg-card/40 px-4 py-3">
+          <div className="flex items-start gap-3 rounded-xl border border-primary/30 bg-primary/5 px-4 py-3">
             <Checkbox
               id="contact-sms-opt-in"
               checked={smsOptIn}
               onCheckedChange={(checked) => setSmsOptIn(checked === true)}
-              className="mt-0.5"
+              className="mt-0.5 size-5 border-2 border-primary bg-background shadow-sm data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground focus-visible:border-primary focus-visible:ring-primary/50"
             />
             <label
               htmlFor="contact-sms-opt-in"
               className="cursor-pointer text-[12px] font-light leading-[1.65] text-muted-foreground"
             >
-              {CONTACT_SMS_OPT_IN_LABEL}{" "}
+              I authorize{" "}
+              <span className="font-medium text-primary">{LISTING_AGENT.name}</span>, the listing agent
+              for this property, to text me personally about {PROPERTY_SITE_NAME}. Texts come{" "}
+              <span className="font-medium text-foreground">only from Bob</span>—not a marketing
+              list, autodialer, or third party. Message frequency varies. Message and data rates may
+              apply. Reply STOP to opt out.{" "}
               <Link href="/terms" className="text-primary hover:underline">
                 Terms
               </Link>{" "}

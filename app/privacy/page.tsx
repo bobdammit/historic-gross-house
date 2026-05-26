@@ -74,9 +74,10 @@ export default function PrivacyPolicyPage() {
 
       <LegalSection title="Text Messaging">
         <p>
-          When you submit the contact form, you may optionally check a box to agree to receive text messages from the
-          listing agent about this property. That choice is voluntary and is not required to send an inquiry. We record
-          whether you opted in so the listing agent knows if texting you is permitted.
+          When you submit the contact form, you may optionally check a box to agree to receive personal text messages
+          from Bob Piljay, the listing agent, about this property only. That choice is voluntary and is not required to
+          send an inquiry. Your number is not sold or added to a third-party marketing list. We record whether you opted
+          in so the listing agent knows if texting you is permitted.
         </p>
         <p>
           The Site does <strong className="font-medium text-foreground">not</strong> send automated marketing texts to

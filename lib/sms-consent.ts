@@ -1,8 +1,4 @@
-import { BROKERAGE, LISTING_AGENT } from "@/lib/broker-info";
-import { PROPERTY_SITE_NAME } from "@/lib/property-content";
-
-/** Checkbox label shown next to the phone field on the contact form. */
-export const CONTACT_SMS_OPT_IN_LABEL = `I agree to receive text messages from ${LISTING_AGENT.name} at ${BROKERAGE.name} about ${PROPERTY_SITE_NAME}. Message frequency varies. Message and data rates may apply. Reply STOP to opt out.`;
+import { LISTING_AGENT } from "@/lib/broker-info";
 
 export function formatSmsOptInForBroker(optIn: boolean) {
   return optIn
