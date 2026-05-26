@@ -13,7 +13,7 @@ export function HeroDocumentsCtas({
   const { unlocked, openGateway, openDocument } = useMaterialsGateway();
 
   return (
-    <div className="rounded-2xl border border-border/25 bg-background/20 p-5 backdrop-blur-sm sm:p-6">
+    <div className="rounded-2xl border border-border/25 bg-card/50 p-5 backdrop-blur-sm max-lg:bg-card/80 max-lg:shadow-sm sm:p-6 lg:bg-background/20">
       <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-stretch">
         <Button
           size="lg"
@@ -54,7 +54,7 @@ export function HeroDocumentsCtas({
           {unlocked ? "Open Full OM" : "Request Full OM"}
         </Button>
       </div>
-      <p className="mt-4 text-[12px] font-light tracking-[0.04em] text-muted-foreground/80">
+      <p className="mt-4 text-[12px] font-light leading-[1.65] tracking-[0.04em] text-muted-foreground max-lg:text-foreground/70 sm:text-muted-foreground/80">
         View the public property flyer instantly. Request access to unlock the full offering memorandum and
         supporting reports.
       </p>

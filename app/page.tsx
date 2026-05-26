@@ -59,50 +59,53 @@ export default function GrossHousePage() {
     <main className="min-h-screen bg-background">
       <SiteNav onNavigate={scrollToSection} onContact={handleGeneralContact} />
 
-      {/* Hero Section */}
-      <section className="relative flex min-h-[100dvh] items-end pb-20 pt-28 sm:pb-24 lg:pb-32 lg:pt-0">
-        <div className="absolute inset-0 z-0">
+      {/* Hero Section — stacked photo + content panel on mobile; overlay layout on desktop */}
+      <section className="relative flex min-h-[100dvh] flex-col lg:items-end lg:pb-32 lg:pt-0">
+        <div className="absolute inset-0 z-0 max-lg:relative max-lg:inset-auto max-lg:h-[min(46dvh,22rem)] max-lg:min-h-[260px] max-lg:shrink-0 sm:max-lg:h-[min(50dvh,24rem)]">
           <Image
             src="/images/gross-house-exterior.jpg"
             alt="The Historic Gross House - 290 East King Avenue, Kingsland, Georgia"
             fill
-            className="object-cover object-[88%_42%] max-lg:object-right lg:object-center"
+            className="object-cover object-[72%_42%] max-lg:object-[68%_38%] lg:object-center"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/75 to-transparent to-65% max-lg:to-55% lg:from-background lg:via-background/95 lg:to-background/40 lg:to-100%" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/35 to-transparent max-lg:via-background/25" />
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-background to-transparent sm:h-20 lg:hidden" />
+          <div className="absolute inset-0 hidden bg-gradient-to-r from-background via-background/95 to-background/40 lg:block" />
+          <div className="absolute inset-0 hidden bg-gradient-to-t from-background via-background/30 to-transparent lg:block" />
         </div>
-        
-        <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 sm:px-8 lg:px-16">
-          <div className="max-w-2xl">
+
+        <div className="relative z-10 mx-auto w-full max-w-[1400px] bg-background px-5 pb-20 pt-8 max-lg:flex-1 sm:px-8 sm:pt-10 lg:bg-transparent lg:px-16 lg:pb-0 lg:pt-0">
+          <div className="max-w-2xl lg:pb-24">
             {/* Property Tag */}
-            <div className="mb-10 flex flex-wrap items-center gap-4 sm:mb-14 sm:gap-6">
+            <div className="mb-8 flex flex-wrap items-center gap-4 sm:mb-10 sm:gap-6 lg:mb-14">
               <span className="inline-flex items-center px-5 py-2.5 text-[9px] font-semibold tracking-[0.3em] bg-primary/90 text-primary-foreground uppercase">
                 For Sale
               </span>
-              <span className="h-px w-16 bg-primary/30" />
-              <span className="text-[11px] text-muted-foreground tracking-[0.2em] uppercase">Kingsland, Georgia</span>
+              <span className="h-px w-16 bg-primary/30 max-lg:hidden sm:block" />
+              <span className="text-[11px] tracking-[0.2em] text-muted-foreground uppercase max-lg:text-foreground/75">
+                Kingsland, Georgia
+              </span>
             </div>
-            
+
             {/* Main Headline */}
-            <h1 className="mb-8 font-serif font-normal tracking-[-0.02em] text-foreground sm:mb-10">
-              <span className="mb-4 block text-[2.35rem] leading-[1.02] text-foreground sm:mb-5 sm:text-[3rem] md:text-[3.5rem] lg:text-[4rem] xl:text-[4.5rem]">
+            <h1 className="mb-6 font-serif font-normal tracking-[-0.02em] text-foreground sm:mb-8 lg:mb-10">
+              <span className="mb-3 block text-[2rem] leading-[1.05] text-foreground sm:mb-4 sm:text-[2.35rem] sm:leading-[1.02] md:text-[3rem] lg:mb-5 lg:text-[3.5rem] xl:text-[4.5rem]">
                 The Historic Gross House · Est. 1912
               </span>
-              <span className="block max-w-lg text-[13px] font-sans font-light uppercase leading-[1.7] tracking-[0.15em] text-primary sm:text-[15px] sm:tracking-[0.18em] md:text-[16px]">
+              <span className="block max-w-lg text-[12px] font-sans font-light uppercase leading-[1.65] tracking-[0.14em] text-primary sm:text-[15px] sm:tracking-[0.18em] md:text-[16px]">
                 A Landmark Estate Built for Commercial Conversion
               </span>
             </h1>
-            
+
             {/* Subheadline */}
-            <p className="mb-10 max-w-md text-[12px] font-light leading-[1.75] text-muted-foreground/90 sm:mb-14 sm:text-[13px] sm:leading-[1.8]">
-              Acquire a distinguished 1912 residence with exceptional potential for professional or medical office conversion. 
-              Nearly 4,000 SF on a 0.55-acre corner lot with ample parking, proven conversion precedent across the street, 
+            <p className="mb-8 max-w-md text-[13px] font-light leading-[1.8] text-foreground/85 sm:mb-10 sm:text-[14px] sm:leading-[1.85] lg:mb-14 lg:text-[13px] lg:text-muted-foreground/90">
+              Acquire a distinguished 1912 residence with exceptional potential for professional or medical office conversion.
+              Nearly 4,000 SF on a 0.55-acre corner lot with ample parking, proven conversion precedent across the street,
               and motivated sellers ready to transact.
             </p>
 
             {/* Address */}
-            <div className="mb-12 flex items-start gap-4 sm:mb-16 sm:items-center sm:gap-5">
+            <div className="mb-10 flex items-start gap-4 sm:mb-12 sm:items-center sm:gap-5 lg:mb-16">
               <span className="mt-2 h-px w-10 shrink-0 bg-primary/50 sm:mt-0 sm:w-12" />
               <span className="text-[13px] tracking-[0.03em] text-foreground/90 sm:text-[14px] sm:tracking-[0.04em]">
                 290 East King Avenue, Kingsland, GA 31548
