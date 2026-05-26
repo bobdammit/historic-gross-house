@@ -1,6 +1,7 @@
 # The Historic Gross House — Commercial Real Estate Listing
 
-> Canonical marketing site for a for-sale commercial conversion opportunity in Kingsland, Georgia.
+> Canonical marketing site: https://historic-gross-house.piljay.com
+> For-sale commercial conversion opportunity in Kingsland, Georgia.
 
 ## Summary
 

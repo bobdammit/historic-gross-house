@@ -1,5 +1,6 @@
 import { BROKERAGE, LISTING_AGENT } from "@/lib/broker-info";
 import { PROPERTY_SITE_NAME } from "@/lib/property-content";
+import { getSiteUrl } from "@/lib/site-metadata";
 
 export const SITE_LEGAL = {
   siteName: PROPERTY_SITE_NAME,
@@ -13,11 +14,8 @@ export const SITE_LEGAL = {
   brokeragePhone: BROKERAGE.phone,
   brokerageAddress: BROKERAGE.fullAddress,
   effectiveDate: "May 25, 2026",
-  siteUrl:
-    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-    "https://your-domain.com",
 } as const;
 
 export function legalPageUrl(path: "/privacy" | "/terms") {
-  return `${SITE_LEGAL.siteUrl}${path}`;
+  return `${getSiteUrl()}${path}`;
 }

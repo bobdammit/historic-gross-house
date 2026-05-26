@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PROPERTY_SITE_NAME } from "@/lib/property-content";
 
-const DEFAULT_SITE_URL = "https://historic-gross-house.vercel.app";
+const DEFAULT_SITE_URL = "https://historic-gross-house.piljay.com";
 
 export function getSiteUrl() {
   return process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || DEFAULT_SITE_URL;
@@ -18,6 +18,8 @@ export const siteMetadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: siteTitle,
   description: siteDescription,
+  applicationName: PROPERTY_SITE_NAME,
+  category: "real estate",
   robots: {
     index: true,
     follow: true,
