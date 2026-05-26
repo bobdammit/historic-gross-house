@@ -13,7 +13,7 @@ export function LegalPageLayout({ title, children }: LegalPageLayoutProps) {
       <header className="border-b border-border/20 bg-card/40">
         <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-5 py-6 sm:px-8 lg:px-12">
           <div>
-            <p className="mb-2 text-[9px] font-medium uppercase tracking-[0.35em] text-primary">
+            <p className="section-heading mb-2 font-medium uppercase tracking-[0.35em] text-primary">
               {PROPERTY_SITE_NAME}
             </p>
             <h1 className="font-serif text-[1.75rem] font-normal tracking-[-0.02em] text-foreground md:text-[2.25rem]">

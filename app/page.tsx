@@ -21,6 +21,7 @@ import { DocumentsSection } from "@/components/documents-section";
 import { ContactForm } from "@/components/contact-form";
 import { SiteNav } from "@/components/site-nav";
 import { BROKERAGE, LISTING_AGENT } from "@/lib/broker-info";
+import { PROPERTY_MAP_EMBED_URL } from "@/lib/property-content";
 import { useState } from "react";
 
 const SHOWING_MESSAGE =
@@ -81,17 +82,17 @@ export default function GrossHousePage() {
             </div>
             
             {/* Main Headline */}
-            <h1 className="mb-8 font-serif font-normal leading-[1.05] tracking-[-0.02em] text-foreground sm:mb-12 sm:leading-[1.02]">
-              <span className="mb-4 block text-[10px] font-medium uppercase tracking-[0.24em] text-primary sm:mb-5 sm:text-[11px] sm:tracking-[0.32em]">
+            <h1 className="mb-8 font-serif font-normal tracking-[-0.02em] text-foreground sm:mb-10">
+              <span className="mb-4 block text-[2.35rem] leading-[1.02] text-foreground sm:mb-5 sm:text-[3rem] md:text-[3.5rem] lg:text-[4rem] xl:text-[4.5rem]">
                 The Historic Gross House · Est. 1912
               </span>
-              <span className="block text-[2.15rem] sm:text-[2.75rem] md:text-[3.5rem] lg:text-[4.25rem] xl:text-[4.75rem]">
+              <span className="block max-w-lg text-[13px] font-sans font-light uppercase leading-[1.7] tracking-[0.15em] text-muted-foreground sm:text-[15px] sm:tracking-[0.18em] md:text-[16px]">
                 A Landmark Estate Built for Commercial Conversion
               </span>
             </h1>
             
             {/* Subheadline */}
-            <p className="mb-10 max-w-lg text-[15px] font-light leading-[1.85] text-muted-foreground sm:mb-14 sm:leading-[1.9] lg:text-[17px]">
+            <p className="mb-10 max-w-md text-[12px] font-light leading-[1.75] text-muted-foreground/90 sm:mb-14 sm:text-[13px] sm:leading-[1.8]">
               Acquire a distinguished 1912 residence with exceptional potential for professional or medical office conversion. 
               Nearly 4,000 SF on a 0.55-acre corner lot with ample parking, proven conversion precedent across the street, 
               and motivated sellers ready to transact.
@@ -150,7 +151,7 @@ export default function GrossHousePage() {
           {/* Bespoke Section Header */}
           <div className="mb-16 max-w-4xl lg:mb-28">
             <div className="flex items-center gap-6 mb-10">
-              <span className="text-[9px] font-medium tracking-[0.4em] text-primary uppercase">Investment Overview</span>
+              <span className="section-heading font-medium tracking-[0.4em] text-primary uppercase">Investment Overview</span>
               <span className="h-px flex-1 bg-border/30 max-w-[200px]" />
             </div>
             <h2 className="font-serif text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-normal text-foreground leading-[1.1] mb-8">
@@ -260,7 +261,7 @@ export default function GrossHousePage() {
           {/* Bespoke Section Header */}
           <div className="mb-16 max-w-4xl lg:mb-28">
             <div className="flex items-center gap-6 mb-10">
-              <span className="text-[9px] font-medium tracking-[0.4em] text-primary uppercase">Market Analysis</span>
+              <span className="section-heading font-medium tracking-[0.4em] text-primary uppercase">Market Analysis</span>
               <span className="h-px flex-1 bg-border/30 max-w-[200px]" />
             </div>
             <h2 className="font-serif text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-normal text-foreground leading-[1.1] mb-8">
@@ -276,7 +277,7 @@ export default function GrossHousePage() {
             <div className="lg:col-span-3 bg-card border border-border/30 rounded-3xl overflow-hidden">
               <div className="aspect-[16/10] relative bg-muted">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3456.7!2d-81.6847!3d30.8001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88e5e13d4b8f0001%3A0x1!2s290%20E%20King%20Ave%2C%20Kingsland%2C%20GA%2031548!5e0!3m2!1sen!2sus!4v1"
+                  src={PROPERTY_MAP_EMBED_URL}
                   width="100%"
                   height="100%"
                   style={{ border: 0, position: 'absolute', inset: 0 }}
@@ -298,7 +299,7 @@ export default function GrossHousePage() {
             {/* Demographics - Narrower */}
             <div className="lg:col-span-2 space-y-8">
               <div className="bg-card border border-border/30 rounded-3xl p-10">
-                <h3 className="text-[13px] font-medium text-primary tracking-[0.1em] uppercase mb-10">Demographics</h3>
+                <h3 className="section-heading mb-10 font-medium tracking-[0.1em] text-primary uppercase">Demographics</h3>
                 <div className="space-y-0">
                   {[
                     { label: "Population (5-Mile)", value: "25,000+" },
@@ -318,7 +319,7 @@ export default function GrossHousePage() {
               </div>
 
               <div className="bg-card border border-border/30 rounded-3xl p-10">
-                <h3 className="text-[13px] font-medium text-primary tracking-[0.1em] uppercase mb-10">Economic Drivers</h3>
+                <h3 className="section-heading mb-10 font-medium tracking-[0.1em] text-primary uppercase">Economic Drivers</h3>
                 <ul className="space-y-5">
                   {[
                     "Naval Submarine Base Kings Bay",
@@ -348,7 +349,7 @@ export default function GrossHousePage() {
           {/* Bespoke Section Header */}
           <div className="mb-16 max-w-4xl lg:mb-28">
             <div className="flex items-center gap-6 mb-10">
-              <span className="text-[9px] font-medium tracking-[0.4em] text-primary uppercase">Connect</span>
+              <span className="section-heading font-medium tracking-[0.4em] text-primary uppercase">Connect</span>
               <span className="h-px flex-1 bg-border/30 max-w-[200px]" />
             </div>
             <h2 className="font-serif text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-normal text-foreground leading-[1.1]">
@@ -452,28 +453,29 @@ export default function GrossHousePage() {
       {/* Footer */}
       <footer className="border-t border-border/20 bg-card/50 py-12 pb-[max(3rem,env(safe-area-inset-bottom))] sm:py-16">
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
-            <div>
-              <p className="text-foreground font-serif text-[1.125rem] mb-2">The Historic Gross House</p>
-              <p className="text-[13px] text-muted-foreground font-light">290 East King Avenue, Kingsland, GA 31548</p>
+          <div className="flex flex-col items-center gap-8 text-center lg:grid lg:grid-cols-3 lg:items-center lg:gap-10 lg:text-left">
+            <div className="lg:justify-self-start">
+              <p className="mb-2 font-serif text-[1.125rem] text-foreground">The Historic Gross House</p>
+              <p className="text-[13px] font-light text-muted-foreground">290 East King Avenue, Kingsland, GA 31548</p>
             </div>
 
-            <div className="text-left lg:text-right">
-              <p className="text-[12px] text-muted-foreground mb-1 font-light">{BROKERAGE.name}</p>
-              <p className="text-[12px] text-muted-foreground mb-1 font-light">
+            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] text-muted-foreground/70 lg:justify-self-center">
+              <a href="/privacy" className="transition-colors hover:text-foreground">
+                Privacy Policy
+              </a>
+              <a href="/terms" className="transition-colors hover:text-foreground">
+                Terms &amp; Conditions
+              </a>
+            </div>
+
+            <div className="lg:justify-self-end lg:text-right">
+              <p className="mb-1 text-[12px] font-light text-muted-foreground">{BROKERAGE.name}</p>
+              <p className="mb-1 text-[12px] font-light text-muted-foreground">
                 {BROKERAGE.phone} · {BROKERAGE.fullAddress}
               </p>
-              <p className="text-[11px] text-muted-foreground/50 tracking-[0.03em] font-light mt-3">
+              <p className="mt-3 text-[11px] font-light tracking-[0.03em] text-muted-foreground/50 whitespace-nowrap">
                 © {new Date().getFullYear()} All rights reserved. Information deemed reliable but not guaranteed.
               </p>
-              <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[11px] text-muted-foreground/70">
-                <a href="/privacy" className="transition-colors hover:text-foreground">
-                  Privacy Policy
-                </a>
-                <a href="/terms" className="transition-colors hover:text-foreground">
-                  Terms &amp; Conditions
-                </a>
-              </div>
             </div>
           </div>
         </div>

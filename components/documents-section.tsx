@@ -82,7 +82,7 @@ function DocumentGroup({
   return (
     <div className="mb-12 last:mb-0">
       <div className="mb-8 flex items-center gap-4">
-        <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-muted-foreground/60">
+        <span className="section-heading font-medium uppercase tracking-[0.3em] text-muted-foreground/60">
           {title}
         </span>
         <span className="h-px max-w-[120px] flex-1 bg-border/20" />
@@ -117,7 +117,7 @@ export function DocumentsSection() {
       <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
         <div className="mb-14 max-w-4xl lg:mb-20">
           <div className="mb-10 flex items-center gap-6">
-            <span className="text-[9px] font-medium uppercase tracking-[0.4em] text-primary">
+            <span className="section-heading font-medium uppercase tracking-[0.4em] text-primary">
               Due Diligence
             </span>
             <span className="h-px max-w-[200px] flex-1 bg-border/30" />

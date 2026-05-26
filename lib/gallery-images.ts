@@ -10,7 +10,6 @@ export type GalleryImage = {
   alt: string;
   caption: string;
   category: GalleryCategory;
-  featured?: boolean;
 };
 
 export const GALLERY_CATEGORY_LABELS: Record<GalleryCategory, string> = {
@@ -46,14 +45,12 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     alt: "The Historic Gross House exterior on East King Avenue",
     caption: "Corner lot frontage — professional visibility on East King Avenue",
     category: "exterior",
-    featured: true,
   },
   {
     src: "/images/exterior-01.jpg",
     alt: "Historic Gross House exterior view",
     caption: "Primary street elevation — strong first impression for client-facing use",
     category: "exterior",
-    featured: true,
   },
   {
     src: "/images/exterior-02.jpg",
@@ -66,7 +63,6 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     alt: "Panoramic exterior view of the property",
     caption: "Panoramic street view — scale of the 0.55-acre corner site",
     category: "exterior",
-    featured: true,
   },
   {
     src: "/images/front-porch.jpg",
@@ -79,7 +75,6 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     alt: "Aerial view of the Historic Gross House property",
     caption: "Aerial perspective — lot size, roof footprint, and parking layout",
     category: "aerial",
-    featured: true,
   },
   {
     src: "/images/drone-02.jpg",
@@ -104,14 +99,12 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     alt: "Historic interior stairwell",
     caption: "Original stairwell — vertical circulation with 1912 architectural character",
     category: "detail",
-    featured: true,
   },
   {
     src: "/images/detail-01.jpg",
     alt: "Historic architectural woodwork detail",
     caption: "Original woodwork — character that modern office build-outs cannot replicate",
     category: "detail",
-    featured: true,
   },
   {
     src: "/images/detail-02.jpg",
@@ -139,10 +132,41 @@ export const GALLERY_IMAGES: GalleryImage[] = [
       alt: `Interior room ${num} at the Historic Gross House`,
       caption: interiorCaption(num),
       category: "interior" as const,
-      featured: num === 1,
     };
   }),
 ];
+
+/** Hero gallery layout — main image plus a mixed secondary set (not all exterior/detail). */
+export const GALLERY_LANDING_MAIN_SRC = "/images/gross-house-exterior.jpg";
+
+export const GALLERY_LANDING_SECONDARY_SRCS = [
+  "/images/interior-01.jpg",
+  "/images/interior-03.jpg",
+  "/images/detail-02.jpg",
+  "/images/interior-04.jpg",
+] as const;
+
+export function getGalleryImageBySrc(src: string) {
+  return GALLERY_IMAGES.find((image) => image.src === src);
+}
+
+export const GALLERY_LANDING_SRCS = new Set<string>([
+  GALLERY_LANDING_MAIN_SRC,
+  ...GALLERY_LANDING_SECONDARY_SRCS,
+]);
+
+function seededShuffle<T>(items: readonly T[], seed: number): T[] {
+  const result = [...items];
+  let state = seed >>> 0;
+
+  for (let i = result.length - 1; i > 0; i--) {
+    state = (Math.imul(1664525, state) + 1013904223) >>> 0;
+    const j = state % (i + 1);
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+
+  return result;
+}
 
 export const GALLERY_FILTERS = [
   { id: "all", label: "All Photos" },
@@ -153,6 +177,17 @@ export const GALLERY_FILTERS = [
 ] as const;
 
 export type GalleryFilterId = (typeof GALLERY_FILTERS)[number]["id"];
+
+/** Shuffled grid photos below the landing hero, excluding landing images on the main view. */
+export function getGalleryGridImages(filter: GalleryFilterId = "all"): GalleryImage[] {
+  const pool = GALLERY_IMAGES.filter((image) => {
+    if (GALLERY_LANDING_SRCS.has(image.src)) return false;
+    if (filter === "all") return true;
+    return image.category === filter;
+  });
+
+  return seededShuffle(pool, 2901912);
+}
 
 export const CONVERSION_PRECEDENT = {
   src: "/images/239-e-king-ave-kingsland.jpg",

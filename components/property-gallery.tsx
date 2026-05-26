@@ -7,6 +7,10 @@ import {
   GALLERY_CATEGORY_LABELS,
   GALLERY_FILTERS,
   GALLERY_IMAGES,
+  GALLERY_LANDING_MAIN_SRC,
+  GALLERY_LANDING_SECONDARY_SRCS,
+  getGalleryGridImages,
+  getGalleryImageBySrc,
   type GalleryFilterId,
   type GalleryImage,
 } from "@/lib/gallery-images";
@@ -24,19 +28,17 @@ const LOAD_MORE_STEP = 12;
 
 function GalleryTile({
   image,
-  index,
   onOpen,
   className,
 }: {
   image: GalleryImage;
-  index: number;
-  onOpen: (index: number) => void;
+  onOpen: (image: GalleryImage) => void;
   className?: string;
 }) {
   return (
     <button
       type="button"
-      onClick={() => onOpen(index)}
+      onClick={() => onOpen(image)}
       className={cn(
         "group relative overflow-hidden rounded-3xl border border-border/30 bg-card text-left transition-all duration-700 hover:border-primary/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40",
         className
@@ -68,34 +70,49 @@ function GalleryTile({
 export function PropertyGallery() {
   const [activeFilter, setActiveFilter] = useState<GalleryFilterId>("all");
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
 
-  const filteredImages = useMemo(() => {
-    if (activeFilter === "all") return GALLERY_IMAGES;
-    return GALLERY_IMAGES.filter((image) => image.category === activeFilter);
-  }, [activeFilter]);
+  const lightboxImages = useMemo(
+    () =>
+      activeFilter === "all"
+        ? GALLERY_IMAGES
+        : GALLERY_IMAGES.filter((image) => image.category === activeFilter),
+    [activeFilter]
+  );
 
-  const visibleImages = filteredImages.slice(0, visibleCount);
-  const featuredImages = GALLERY_IMAGES.filter((image) => image.featured).slice(0, 6);
-  const activeImage = lightboxIndex !== null ? filteredImages[lightboxIndex] : null;
+  const gridImages = useMemo(() => getGalleryGridImages(activeFilter), [activeFilter]);
+  const visibleImages = gridImages.slice(0, visibleCount);
+  const landingMain = getGalleryImageBySrc(GALLERY_LANDING_MAIN_SRC) ?? GALLERY_IMAGES[0];
+  const landingSecondary = GALLERY_LANDING_SECONDARY_SRCS.map((src) => getGalleryImageBySrc(src)).filter(
+    (image): image is GalleryImage => Boolean(image)
+  );
+  const activeImage = lightboxSrc ? getGalleryImageBySrc(lightboxSrc) : null;
+  const lightboxIndex =
+    activeImage ? lightboxImages.findIndex((image) => image.src === lightboxSrc) : -1;
 
-  const openLightbox = (index: number) => setLightboxIndex(index);
-  const closeLightbox = () => setLightboxIndex(null);
+  const openLandingImage = (image: GalleryImage) => {
+    setActiveFilter("all");
+    setVisibleCount(INITIAL_VISIBLE);
+    setLightboxSrc(image.src);
+  };
+
+  const openLightbox = (image: GalleryImage) => setLightboxSrc(image.src);
+  const closeLightbox = () => setLightboxSrc(null);
 
   const showPrevious = () => {
-    if (lightboxIndex === null) return;
-    setLightboxIndex((lightboxIndex - 1 + filteredImages.length) % filteredImages.length);
+    if (lightboxIndex < 0) return;
+    setLightboxSrc(lightboxImages[(lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length].src);
   };
 
   const showNext = () => {
-    if (lightboxIndex === null) return;
-    setLightboxIndex((lightboxIndex + 1) % filteredImages.length);
+    if (lightboxIndex < 0) return;
+    setLightboxSrc(lightboxImages[(lightboxIndex + 1) % lightboxImages.length].src);
   };
 
   const handleFilterChange = (filter: GalleryFilterId) => {
     setActiveFilter(filter);
     setVisibleCount(INITIAL_VISIBLE);
-    setLightboxIndex(null);
+    setLightboxSrc(null);
   };
 
   return (
@@ -103,7 +120,7 @@ export function PropertyGallery() {
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-16">
         <div className="mb-12 max-w-4xl lg:mb-16">
           <div className="mb-10 flex items-center gap-6">
-            <span className="text-[9px] font-medium uppercase tracking-[0.4em] text-primary">
+            <span className="section-heading font-medium uppercase tracking-[0.4em] text-primary">
               Property Photography
             </span>
             <span className="h-px max-w-[200px] flex-1 bg-border/30" />
@@ -120,31 +137,18 @@ export function PropertyGallery() {
 
         <div className="mb-12 grid gap-6 lg:grid-cols-12 lg:gap-8">
           <GalleryTile
-            image={featuredImages[0]}
-            index={GALLERY_IMAGES.indexOf(featuredImages[0])}
-            onOpen={() => {
-              setActiveFilter("all");
-              setVisibleCount(INITIAL_VISIBLE);
-              setLightboxIndex(GALLERY_IMAGES.indexOf(featuredImages[0]));
-            }}
+            image={landingMain}
+            onOpen={openLandingImage}
             className="lg:col-span-7"
           />
-          <div className="grid gap-6 sm:grid-cols-2 lg:col-span-5 lg:grid-cols-1 lg:gap-8">
-            {featuredImages.slice(1, 3).map((image) => {
-              const index = GALLERY_IMAGES.indexOf(image);
-              return (
-                <GalleryTile
-                  key={image.src}
-                  image={image}
-                  index={index}
-                  onOpen={() => {
-                    setActiveFilter("all");
-                    setVisibleCount(INITIAL_VISIBLE);
-                    setLightboxIndex(index);
-                  }}
-                />
-              );
-            })}
+          <div className="grid gap-6 sm:grid-cols-2 lg:col-span-5 lg:grid-cols-2 lg:gap-4">
+            {landingSecondary.map((image) => (
+              <GalleryTile
+                key={image.src}
+                image={image}
+                onOpen={openLandingImage}
+              />
+            ))}
           </div>
         </div>
 
@@ -167,25 +171,17 @@ export function PropertyGallery() {
         </div>
 
         <p className="mb-8 text-[12px] font-light tracking-[0.04em] text-muted-foreground/80">
-          Showing {visibleImages.length} of {filteredImages.length} photos
+          Showing {visibleImages.length} of {gridImages.length} photos
           {activeFilter !== "all" ? ` in ${GALLERY_CATEGORY_LABELS[activeFilter as keyof typeof GALLERY_CATEGORY_LABELS]}` : ""}
         </p>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {visibleImages.map((image) => {
-            const index = filteredImages.indexOf(image);
-            return (
-              <GalleryTile
-                key={image.src}
-                image={image}
-                index={index}
-                onOpen={openLightbox}
-              />
-            );
-          })}
+          {visibleImages.map((image) => (
+            <GalleryTile key={image.src} image={image} onOpen={openLightbox} />
+          ))}
         </div>
 
-        {visibleCount < filteredImages.length && (
+        {visibleCount < gridImages.length && (
           <div className="mt-12 flex justify-center">
             <Button
               variant="outline"
@@ -198,12 +194,12 @@ export function PropertyGallery() {
         )}
       </div>
 
-      <Dialog open={lightboxIndex !== null} onOpenChange={(open) => !open && closeLightbox()}>
+      <Dialog open={lightboxSrc !== null} onOpenChange={(open) => !open && closeLightbox()}>
         <DialogContent
           showCloseButton
           className="max-h-[95dvh] w-[min(1200px,calc(100vw-1rem))] max-w-none gap-0 overflow-hidden border-border/40 bg-background p-0 sm:w-[min(1200px,calc(100vw-2rem))]"
         >
-          {activeImage && lightboxIndex !== null && (
+          {activeImage && lightboxIndex >= 0 && (
             <>
               <DialogTitle className="sr-only">{activeImage.alt}</DialogTitle>
               <DialogDescription className="sr-only">{activeImage.caption}</DialogDescription>
@@ -228,7 +224,7 @@ export function PropertyGallery() {
                     </p>
                   </div>
                   <p className="shrink-0 text-[12px] text-muted-foreground">
-                    {lightboxIndex + 1} / {filteredImages.length}
+                    {lightboxIndex + 1} / {lightboxImages.length}
                   </p>
                 </div>
 

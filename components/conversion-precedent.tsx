@@ -32,7 +32,7 @@ export function ConversionPrecedent() {
 
           <div>
             <div className="mb-8 flex items-center gap-6">
-              <span className="text-[9px] font-medium uppercase tracking-[0.4em] text-primary">
+              <span className="section-heading font-medium uppercase tracking-[0.4em] text-primary">
                 Conversion Precedent
               </span>
               <span className="h-px max-w-[120px] flex-1 bg-border/30" />

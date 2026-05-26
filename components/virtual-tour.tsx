@@ -43,7 +43,7 @@ export function VirtualTour({ onScheduleTour }: VirtualTourProps) {
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
             <div className="order-2 lg:order-1">
               <div className="mb-10 flex items-center gap-6">
-                <span className="text-[9px] font-medium uppercase tracking-[0.4em] text-primary">
+                <span className="section-heading font-medium uppercase tracking-[0.4em] text-primary">
                   Immersive Experience
                 </span>
                 <span className="h-px max-w-[120px] flex-1 bg-border/30" />
