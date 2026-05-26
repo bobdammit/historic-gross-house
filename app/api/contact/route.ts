@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { notifyBroker, sendVisitorConfirmation, validateRequiredContactFields } from "@/lib/notify-broker";
 import { buildContactSmsAlert, notifyBrokerByText } from "@/lib/notify-sms";
 import { PROPERTY_SITE_NAME } from "@/lib/property-content";
+import { formatSmsOptInForBroker } from "@/lib/sms-consent";
 
 type ContactRequest = {
   name?: string;
@@ -9,6 +10,7 @@ type ContactRequest = {
   phone?: string;
   message?: string;
   inquiryType?: "general" | "showing";
+  smsOptIn?: boolean;
 };
 
 export async function POST(request: Request) {
@@ -30,6 +32,7 @@ export async function POST(request: Request) {
   const message = body.message?.trim() || "No message provided.";
   const inquiryType = body.inquiryType === "showing" ? "showing" : "general";
   const inquiryLabel = inquiryType === "showing" ? "Showing request" : "General inquiry";
+  const smsOptIn = body.smsOptIn === true;
 
   try {
     await notifyBroker({
@@ -41,6 +44,7 @@ export async function POST(request: Request) {
         `Name: ${name}`,
         `Email: ${email}`,
         `Phone: ${phone}`,
+        `SMS opt-in: ${formatSmsOptInForBroker(smsOptIn)}`,
         `Inquiry type: ${inquiryLabel}`,
         "",
         "Message:",
@@ -57,7 +61,7 @@ export async function POST(request: Request) {
 
   await sendVisitorConfirmation(email, name, inquiryType === "showing" ? "showing" : "general");
   await notifyBrokerByText(
-    buildContactSmsAlert({ name, phone, email, inquiryLabel })
+    buildContactSmsAlert({ name, phone, email, inquiryLabel, smsOptIn })
   );
 
   return NextResponse.json({ success: true });

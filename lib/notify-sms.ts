@@ -1,4 +1,5 @@
 import { PROPERTY_SITE_NAME } from "@/lib/property-content";
+import { formatSmsOptInForAlert } from "@/lib/sms-consent";
 
 function getTwilioConfig() {
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -74,8 +75,10 @@ export function buildContactSmsAlert(options: {
   phone: string;
   email: string;
   inquiryLabel: string;
+  smsOptIn: boolean;
 }) {
-  return `${options.inquiryLabel}: ${options.name} · ${options.phone} · ${options.email} — ${PROPERTY_SITE_NAME}`;
+  const consent = formatSmsOptInForAlert(options.smsOptIn);
+  return `${options.inquiryLabel}: ${options.name} · ${options.phone} · ${options.email} · ${consent} — ${PROPERTY_SITE_NAME}`;
 }
 
 export function buildMaterialsSmsAlert(options: {

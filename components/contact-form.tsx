@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { emailInputProps, normalizePhoneInput, phoneInputProps } from "@/lib/form-validation";
+import { CONTACT_SMS_OPT_IN_LABEL } from "@/lib/sms-consent";
 
 type ContactFormProps = {
   prefillMessage?: string;
@@ -15,6 +18,7 @@ export function ContactForm({ prefillMessage = "", inquiryType = "general" }: Co
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(prefillMessage);
+  const [smsOptIn, setSmsOptIn] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -40,6 +44,7 @@ export function ContactForm({ prefillMessage = "", inquiryType = "general" }: Co
           phone,
           message,
           inquiryType,
+          smsOptIn,
         }),
       });
 
@@ -105,6 +110,27 @@ export function ContactForm({ prefillMessage = "", inquiryType = "general" }: Co
             placeholder="9123221377"
             {...phoneInputProps}
           />
+          <div className="flex items-start gap-3 rounded-xl border border-border/20 bg-card/40 px-4 py-3">
+            <Checkbox
+              id="contact-sms-opt-in"
+              checked={smsOptIn}
+              onCheckedChange={(checked) => setSmsOptIn(checked === true)}
+              className="mt-0.5"
+            />
+            <label
+              htmlFor="contact-sms-opt-in"
+              className="cursor-pointer text-[12px] font-light leading-[1.65] text-muted-foreground"
+            >
+              {CONTACT_SMS_OPT_IN_LABEL}{" "}
+              <Link href="/terms" className="text-primary hover:underline">
+                Terms
+              </Link>{" "}
+              ·{" "}
+              <Link href="/privacy" className="text-primary hover:underline">
+                Privacy
+              </Link>
+            </label>
+          </div>
         </div>
       </div>
 

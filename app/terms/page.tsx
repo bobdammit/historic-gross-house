@@ -58,8 +58,9 @@ export default function TermsPage() {
         </p>
         <p>
           <strong className="font-medium text-foreground">Program description:</strong> This Site may send internal
-          operational SMS alerts only to the listing agent&apos;s mobile number when a visitor submits a contact or
-          materials request form. Visitors to the Site do not receive SMS messages from this program.
+          operational SMS alerts to the listing agent&apos;s mobile number when a visitor submits a contact form.
+          Visitors may optionally opt in on the contact form to receive text messages from the listing agent about this
+          listing; the Site does not send automated visitor texts on submit.
         </p>
         <p>
           <strong className="font-medium text-foreground">Message frequency:</strong> Messages are sent only when a

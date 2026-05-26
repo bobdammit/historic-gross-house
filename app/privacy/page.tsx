@@ -74,13 +74,18 @@ export default function PrivacyPolicyPage() {
 
       <LegalSection title="Text Messaging">
         <p>
-          This Site does <strong className="font-medium text-foreground">not</strong> send marketing or promotional
-          text messages to visitors. If SMS notifications are enabled, they are sent only to the listing agent&apos;s
-          business mobile number as an internal operational alert when a form is submitted.
+          When you submit the contact form, you may optionally check a box to agree to receive text messages from the
+          listing agent about this property. That choice is voluntary and is not required to send an inquiry. We record
+          whether you opted in so the listing agent knows if texting you is permitted.
         </p>
         <p>
-          Website visitors receive email confirmation only and are not enrolled in an SMS program by submitting a
-          contact or materials request form.
+          The Site does <strong className="font-medium text-foreground">not</strong> send automated marketing texts to
+          visitors on form submit. If SMS alerts are enabled, the listing agent&apos;s mobile number may receive an
+          internal operational text with inquiry details when a contact form is submitted.
+        </p>
+        <p>
+          Materials request forms and visitors who do not opt in receive email confirmation only. Reply{" "}
+          <strong>STOP</strong> to any message from the listing agent to opt out of further texts.
         </p>
       </LegalSection>
 
