@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { siteMetadata } from '@/lib/site-metadata'
 import './globals.css'
 
 const geistSans = Geist({ 
@@ -18,29 +19,7 @@ const playfair = Playfair_Display({
   variable: '--font-playfair',
 });
 
-export const metadata: Metadata = {
-  title: 'The Historic Gross House | 290 East King Avenue, Kingsland, GA',
-  description: 'Commercial conversion opportunity in Kingsland, Georgia. Historic 1912 residence offering ±3,955 SF for professional or medical office use. Asking $574,900.',
-  generator: 'v0.app',
-  keywords: ['commercial real estate', 'Kingsland Georgia', 'historic property', 'adaptive reuse', 'professional office', 'medical office'],
-  icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
-  },
-}
+export const metadata: Metadata = siteMetadata
 
 export const viewport: Viewport = {
   width: 'device-width',
