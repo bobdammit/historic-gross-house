@@ -143,3 +143,15 @@ html {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+@utility section-pad {
+  padding-block: calc(var(--spacing) * 20);
+
+  @media (width >= 48rem) {
+    padding-block: calc(var(--spacing) * 28);
+  }
+
+  @media (width >= 64rem) {
+    padding-block: calc(var(--spacing) * 48);
+  }
+}
