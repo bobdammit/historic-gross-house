@@ -93,7 +93,7 @@ async function sendEmail({ to, subject, text, replyTo }: SendEmailOptions) {
   if (!response.ok) {
     const detail =
       parsedBody?.message ??
-      responseBody ||
+      responseBody ??
       `Resend request failed with status ${response.status}`;
     console.error("[email-send-failed]", {
       status: response.status,
