@@ -66,11 +66,11 @@ export default function GrossHousePage() {
             src="/images/gross-house-exterior.jpg"
             alt="The Historic Gross House - 290 East King Avenue, Kingsland, Georgia"
             fill
-            className="object-cover"
+            className="object-cover object-[88%_42%] max-lg:object-right lg:object-center"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/75 to-transparent to-65% max-lg:to-55% lg:from-background lg:via-background/95 lg:to-background/40 lg:to-100%" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/35 to-transparent max-lg:via-background/25" />
         </div>
         
         <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 sm:px-8 lg:px-16">
