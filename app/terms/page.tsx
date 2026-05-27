@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LegalPageLayout, LegalSection } from "@/components/legal-page-layout";
+import { FAIR_HOUSING_DISCLAIMER } from "@/lib/fair-housing";
 import { SITE_CREDITS, SITE_CREDITS_COPYRIGHT_SECTION_ID } from "@/lib/site-credits";
 import { SITE_LEGAL } from "@/lib/site-legal";
 
@@ -91,6 +92,15 @@ export default function TermsPage() {
           Offering materials, floor plans, market reports, and other documents made available on the Site are
           confidential marketing materials intended for qualified inquiry purposes unless otherwise marked public. You
           may not reproduce, distribute, or rely on them without independent verification.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="Fair Housing">
+        <p>{FAIR_HOUSING_DISCLAIMER}</p>
+        <p>
+          This property is offered in compliance with the federal Fair Housing Act and applicable Georgia fair housing
+          laws. Nothing on the Site shall be construed as indicating any preference, limitation, or discrimination based
+          on a protected class.
         </p>
       </LegalSection>
 

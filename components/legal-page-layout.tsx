@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { FairHousingDisclaimer } from "@/components/fair-housing-disclaimer";
 import { SiteCredits } from "@/components/site-credits";
 import { SITE_CREDITS } from "@/lib/site-credits";
 import { PROPERTY_SITE_NAME } from "@/lib/property-content";
@@ -35,6 +36,7 @@ export function LegalPageLayout({ title, children }: LegalPageLayoutProps) {
 
       <footer className="border-t border-border/20 bg-card/30 py-10">
         <div className="mx-auto max-w-3xl space-y-8 px-8 lg:px-12">
+          <FairHousingDisclaimer align="left" className="max-w-none" />
           <SiteCredits align="left" className="max-w-none" />
           <div className="flex flex-col gap-3 text-[13px] font-light text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
             <p>© {new Date().getFullYear()} {PROPERTY_SITE_NAME}</p>

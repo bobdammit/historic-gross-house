@@ -21,6 +21,7 @@ import { HeroDocumentsCtas } from "@/components/hero-documents-ctas";
 import { DocumentsSection } from "@/components/documents-section";
 import { ContactForm } from "@/components/contact-form";
 import { SiteNav } from "@/components/site-nav";
+import { FairHousingDisclaimer } from "@/components/fair-housing-disclaimer";
 import { SiteCredits } from "@/components/site-credits";
 import { BROKERAGE, LISTING_AGENT } from "@/lib/broker-info";
 import { SITE_CREDITS } from "@/lib/site-credits";
@@ -496,7 +497,8 @@ export function HomePage() {
             </div>
           </div>
 
-          <div className="mt-10 border-t border-border/15 pt-8 sm:mt-12 sm:pt-10">
+          <div className="mt-10 space-y-8 border-t border-border/15 pt-8 sm:mt-12 sm:pt-10">
+            <FairHousingDisclaimer />
             <SiteCredits />
           </div>
         </div>
